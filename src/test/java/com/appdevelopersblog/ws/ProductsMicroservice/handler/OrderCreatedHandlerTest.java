@@ -24,7 +24,16 @@ class OrderCreatedHandlerTest {
 
 
     @Test
-    void listen() throws Exception {
+    void listen_Success() throws Exception {
+
+        OrderCreated testEvent = TestEventData.buildOrderCreatedEvent(randomUUID(), randomUUID().toString());
+        handler.listen(testEvent);
+
+        verify(dispatchServiceMock, times(1)).process(testEvent);
+    }
+
+    @Test
+    void listen_ServiceThrowsException() throws Exception {
 
         OrderCreated testEvent = TestEventData.buildOrderCreatedEvent(randomUUID(), randomUUID().toString());
         handler.listen(testEvent);
