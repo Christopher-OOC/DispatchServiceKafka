@@ -1,9 +1,14 @@
 package com.appdevelopersblog.ws.ProductsMicroservice.handler;
 
+import com.appdevelopersblog.ws.ProductsMicroservice.message.OrderCreated;
 import com.appdevelopersblog.ws.ProductsMicroservice.service.DispatchService;
+import com.appdevelopersblog.ws.ProductsMicroservice.util.TestEventData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
+import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.*;
 
 class OrderCreatedHandlerTest {
@@ -21,8 +26,9 @@ class OrderCreatedHandlerTest {
     @Test
     void listen() {
 
-        handler.listen("payload");
+        OrderCreated testEvent = TestEventData.buildOrderCreatedEvent(randomUUID(), randomUUID().toString());
+        handler.listen(testEvent);
 
-        verify(dispatchServiceMock, times(1)).process("payload");
+        verify(dispatchServiceMock, times(1)).process(testEvent);
     }
 }

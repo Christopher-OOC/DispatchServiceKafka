@@ -1,5 +1,6 @@
 package com.appdevelopersblog.ws.ProductsMicroservice.service;
 
+import com.appdevelopersblog.ws.ProductsMicroservice.message.OrderCreated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DispatchService {
 
-    public void process(String patload) {
+    public void process(OrderCreated payload) {
 
     }
 
