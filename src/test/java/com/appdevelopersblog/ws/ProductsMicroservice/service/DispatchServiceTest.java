@@ -35,4 +35,13 @@ class DispatchServiceTest {
 
         verify(kafkaProducerMock, times(1)).send(eq("order.dispatch"), any(OrderDispatched.class));
     }
+
+    void process_ProducerThrowsException() throws Exception {
+        doThrow(new RuntimeException("Producer Failure")).when(kafkaProducerMock).send(eq("order.dispatched"), any(OrderDispatched.class));
+
+        OrderCreated testEvent = TestEventData.buildOrderCreatedEvent(randomUUID(), randomUUID().toString());
+        service.process(testEvent);
+
+        verify(kafkaProducerMock, times(1)).send(eq("order.dispatch"), any(OrderDispatched.class));
+    }
 }
