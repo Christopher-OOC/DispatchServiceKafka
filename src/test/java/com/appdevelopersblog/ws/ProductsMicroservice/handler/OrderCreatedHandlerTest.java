@@ -24,7 +24,7 @@ class OrderCreatedHandlerTest {
 
 
     @Test
-    void listen() {
+    void listen() throws Exception {
 
         OrderCreated testEvent = TestEventData.buildOrderCreatedEvent(randomUUID(), randomUUID().toString());
         handler.listen(testEvent);
