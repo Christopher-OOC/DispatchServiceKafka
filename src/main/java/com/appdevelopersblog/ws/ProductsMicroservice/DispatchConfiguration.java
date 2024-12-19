@@ -1,12 +1,11 @@
 package com.appdevelopersblog.ws.ProductsMicroservice;
 
 import com.appdevelopersblog.ws.ProductsMicroservice.message.OrderCreated;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,15 +21,13 @@ import java.util.Map;
 
 @Configuration
 @ComponentScan(basePackages = "com.appdevelopersblog.ws.ProductsMicroservice")
+@Slf4j
 public class DispatchConfiguration {
-
-    private static final Logger log = LoggerFactory.getLogger(DispatchConfiguration.class);
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(ConsumerFactory<String, Object> consumerFactory) {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
-
 
         return factory;
     }
