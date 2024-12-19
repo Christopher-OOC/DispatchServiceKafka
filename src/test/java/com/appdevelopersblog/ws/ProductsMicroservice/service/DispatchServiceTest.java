@@ -32,7 +32,6 @@ class DispatchServiceTest {
     void process() throws Exception {
         when(kafkaProducerMock.send(anyString(), any(OrderDispatched.class))).thenReturn(mock(CompletableFuture.class));
 
-
         OrderCreated testEvent = TestEventData.buildOrderCreatedEvent(randomUUID(), randomUUID().toString());
         service.process(testEvent);
 
