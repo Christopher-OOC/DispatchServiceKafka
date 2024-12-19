@@ -111,6 +111,5 @@ public class OrderDispatchIntegrationTest {
                 .withPayload(data)
                 .setHeader(KafkaHeaders.TOPIC, topic)
                 .build()).get();
-
     }
 }
