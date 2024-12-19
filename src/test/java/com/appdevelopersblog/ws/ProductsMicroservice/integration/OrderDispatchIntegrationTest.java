@@ -61,19 +61,19 @@ public class OrderDispatchIntegrationTest {
         }
     }
 
-    public static class KafkaTestListener() {
+    public static class KafkaTestListener {
 
         AtomicInteger dispatchPreparingCounter = new AtomicInteger(0);
         AtomicInteger orderDispatchedCounter = new AtomicInteger(0);
 
         @KafkaListener(groupId = "kafkaIntegrationTest", topics = DISPATCH_TRACKING_TOPIC)
-        void receiveDispatchPreparing(@Payload DispatchPreparing payload) {
+        void receiveDispatchPreparing(@Payload OrderCreated payload) {
             log.debug("Received DispatchPreparing: " + payload);
             dispatchPreparingCounter.incrementAndGet();
         }
 
         @KafkaListener(groupId = "kafkaIntegrationTest", topics = ORDER_DISPATCH_TOPIC)
-        void receiveDispatchPreparing(@Payload DispatchPreparing payload) {
+        void receiveDispatchOrder(@Payload OrderCreated payload) {
             log.debug("Received OrderDispatched: " + payload);
             orderDispatchedCounter.incrementAndGet();
         }
